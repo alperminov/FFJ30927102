@@ -28,7 +28,7 @@ public class Character : MonoBehaviour {
 		rigidbody.AddForce (new Vector2(0f, 200f));
 	}
 
-	protected void Move(float axis) {
+	protected void Move() {
 
 		float h = Input.GetAxis("Horizontal");
 
