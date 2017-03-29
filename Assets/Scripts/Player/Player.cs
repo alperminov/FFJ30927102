@@ -5,8 +5,10 @@ using UnityEngine;
 public class Player : Character {
 
 	// Use this for initialization
+	public Vector2 com;
 	void Start () {
 		rigidbody = GetComponent<Rigidbody2D> ();
+		rigidbody.centerOfMass = com;
 	}
 
 	// Update is called once per frame
