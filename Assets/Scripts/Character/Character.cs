@@ -25,7 +25,7 @@ public class Character : MonoBehaviour {
 	protected void Jump() {
 		onGround = false;
 		//rigidbody = GetComponent<Rigidbody2D> ();
-		rigidbody.AddForce (new Vector2(0f, 200f));
+		rigidbody.AddForce (new Vector2(0f, 1000f));
 	}
 
 	protected void Move() {
