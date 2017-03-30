@@ -7,10 +7,10 @@ public class Character : MonoBehaviour {
 	
 	protected bool onGround { get; set; }
 	protected Rigidbody2D rigidbody;
-	public float moveForce = 1000f;
-	public float maxSpeed = 5f;
-	public bool facingRight = true;
-	public bool jump = false;
+	public float moveSpeed;
+	public float maxSpeed;
+	public float jumpForceY;
+	public float jumpForceX;
 
 	// Use this for initialization
 	void Start () {
@@ -22,27 +22,14 @@ public class Character : MonoBehaviour {
 
 	}
 
-	protected void Jump() {
+	protected void Jump(float moveDirection) {
+		//rigidbody = GetComponent<Rigidbody2D> ();
 		onGround = false;
-		//rigidbody = GetComponent<Rigidbody2D> ();
-		rigidbody.AddForce (new Vector2(0f, 1000f));
+		rigidbody.AddForce (new Vector2(moveDirection * jumpForceX * Time.deltaTime, jumpForceY * Time.deltaTime), ForceMode2D.Impulse);
 	}
 
-	protected void Move() {
-
-		float h = Input.GetAxis("Horizontal");
-
-		if (Mathf.Abs (rigidbody.velocity.x) > maxSpeed)
-			rigidbody.velocity = new Vector2(Mathf.Sign (rigidbody.velocity.x) * maxSpeed, rigidbody.velocity.y);
-		
-		if (rigidbody.velocity.x < maxSpeed)
-			rigidbody.AddForce (Vector3.right * h * moveForce * Time.deltaTime);
-	}
-
-
-	protected void Stop() {
-		//rigidbody = GetComponent<Rigidbody2D> ();
-		//rigidbody.AddForce
+	protected void Move(float moveDirection) {
+		transform.position += Vector3.right * moveDirection * moveSpeed * Time.deltaTime;
 	}
 		
 	protected void OnCollisionEnter2D (Collision2D collider) {
