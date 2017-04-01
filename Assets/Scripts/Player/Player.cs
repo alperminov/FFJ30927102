@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Player : Character {
 
-	// Use this for initialization
-	void Start () {
+
+    private const string bedTag = "Bed";
+    private const string tableTag = "Table";
+    private const string doorTag = "Door";
+    private const string lockerTag = "Locker";
+
+    // Use this for initialization
+    void Start () {
 		this.rigidbody = GetComponent<Rigidbody2D> ();
 		this.moveSpeed = 5f;
      	this.maxSpeed = 5f;
@@ -26,4 +32,26 @@ public class Player : Character {
 			} 
 		}
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(bedTag);
+         if (other.gameObject.tag == bedTag)
+         {
+             Debug.Log(bedTag);
+         }
+         if (other.gameObject.tag == tableTag)
+         {
+             Debug.Log(tableTag);
+         }
+         if (other.gameObject.tag == doorTag)
+         {
+             Debug.Log(doorTag);
+         }
+         if (other.gameObject.tag == lockerTag)
+         {
+             Debug.Log(lockerTag);
+         }
+
+    }
 }
