@@ -1,12 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Inventory\Inventory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Character\Character.cs">
     <Files>
       <File FileName="Assets\Scripts\Player\Player.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Inventory\InventoryBlock.cs" Line="22" Column="3" />
-      <File FileName="Assets\Scripts\Inventory\Item.cs" Line="14" Column="25" />
-      <File FileName="Assets\Scripts\Inventory\Axe.cs" Line="10" Column="16" />
-      <File FileName="Assets\Scripts\Inventory\Inventory.cs" Line="70" Column="3" />
+      <File FileName="Assets\Scripts\Inventory\InventoryBlock.cs" Line="17" Column="77" />
+      <File FileName="Assets\Scripts\Inventory\Inventory.cs" Line="84" Column="83" />
+      <File FileName="Assets\Scripts\Items\Axe.cs" Line="8" Column="42" />
+      <File FileName="Assets\Scripts\Items\Hammer.cs" Line="8" Column="42" />
+      <File FileName="Assets\Scripts\Items\Item.cs" Line="16" Column="3" />
+      <File FileName="Assets\Scripts\Character\Character.cs" Line="9" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
