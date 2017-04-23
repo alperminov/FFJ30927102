@@ -8,24 +8,27 @@ public class PlayerMenu : MonoBehaviour {
 	const int MOUSE_RIGHT_BUTTON = 1;
 	const int MOUSE_WHEEL_BUTTON = 2;
 
-	bool inventoryIsActive;
-	Canvas canvas;
-	public GameObject containerCellPrefab; //Ссылка блок инвентаря в Unity, задается в Unity UI
-	public string containerTag;
 	public string playerInventoryTag;
-	public int containerCellCount = 16, inventoryColumnCount = 4; //Параметры сетки инвентаря
-	Item draggedItem; //Предмет, который игрок перетаскивает
-	bool mouseLkHold; //Флаг зажатия ЛКМ
-	float clickTime= 0f;
-	ContainerCell previousInventoryCell; //Блок, из которого игрок начал тащить предмет. Необходим для свопа обьектов в инвентаре
-	Container playerInventory;
+	public string playerTag;
+
+	private bool inventoryIsActive;
+	private Canvas canvas;
+	private Item draggedItem; //Предмет, который игрок перетаскивает
+	private bool mouseLkHold; //Флаг зажатия ЛКМ
+	private float clickTime= 0f;
+	private ContainerCell previousInventoryCell; //Блок, из которого игрок начал тащить предмет. Необходим для свопа обьектов в инвентаре
+	private Container playerInventory;
+	private Container container;
+	private Player player;
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag (playerTag).GetComponent<Player> ();
 		canvas = GetComponent<Canvas> ();
 		canvas.enabled = false;
 		inventoryIsActive = false;
-		playerInventory = new Container (containerCellCount, inventoryColumnCount, playerInventoryTag, containerCellPrefab);
+		playerInventory = player.playerInventory;
+		//container = new Container (containerCellCount, inventoryColumnCount, containerTag, containerCellPrefab);
 	}
 	
 	// Update is called once per frame

@@ -10,14 +10,20 @@ public class Player : Character {
     private const string doorTag = "Door";
     private const string lockerTag = "Locker";
 
+	public int containerCellCount = 16, inventoryColumnCount = 4; //Параметры сетки инвентаря
+	public string containerTag;
+	public GameObject containerCellPrefab; //Ссылка блок инвентаря в Unity, задается в Unity UI
+	public Container playerInventory { get; set; }
+
     // Use this for initialization
     void Start () {
-		this.rigidbody = GetComponent<Rigidbody2D> ();
-		this.moveSpeed = 5f;
-     	this.maxSpeed = 5f;
-		this.jumpForceY = moveSpeed * rigidbody.mass * 100f;
-		this.jumpForceX = moveSpeed * rigidbody.mass * 80f;
-		this.rigidbody.centerOfMass = new Vector2(0f, -2f);
+		playerInventory = new Container (containerCellCount, inventoryColumnCount, containerTag, containerCellPrefab);
+		rigidbody = GetComponent<Rigidbody2D> ();
+		moveSpeed = 5f;
+     	maxSpeed = 5f;
+		jumpForceY = moveSpeed * rigidbody.mass * 100f;
+		jumpForceX = moveSpeed * rigidbody.mass * 80f;
+		rigidbody.centerOfMass = new Vector2(0f, -2f);
 	}
 
 	// Update is called once per frame

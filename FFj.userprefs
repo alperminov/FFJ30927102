@@ -2,14 +2,14 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu\PlayerMenu.cs">
     <Files>
-      <File FileName="Assets\Scripts\Player\Player.cs" Line="43" Column="19" />
-      <File FileName="Assets\Scripts\Items\Axe.cs" Line="13" Column="3" />
-      <File FileName="Assets\Scripts\Items\Hammer.cs" Line="8" Column="56" />
-      <File FileName="Assets\Scripts\Items\Item.cs" Line="8" Column="31" />
+      <File FileName="Assets\Scripts\Player\Player.cs" Line="16" Column="47" />
+      <File FileName="Assets\Scripts\Items\Axe.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Items\Hammer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Items\Item.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Character\Character.cs" Line="9" Column="1" />
       <File FileName="Assets\Scripts\Menu\MainMenu.cs" Line="6" Column="23" />
-      <File FileName="Assets\Scripts\Menu\PlayerMenu.cs" Line="59" Column="83" />
-      <File FileName="Assets\Scripts\Container\Container.cs" Line="12" Column="44" />
+      <File FileName="Assets\Scripts\Menu\PlayerMenu.cs" Line="10" Column="1" />
+      <File FileName="Assets\Scripts\Container\Container.cs" Line="8" Column="2" />
       <File FileName="Assets\Scripts\Container\ContainerCell.cs" Line="9" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
