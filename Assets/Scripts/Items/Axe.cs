@@ -5,11 +5,11 @@ using UnityEngine;
 public class Axe : Item {
 	
 	public string spriteName = "Items/axe";
-	public string spriteInBlockName = "Items/axe_in_block";
+	public string spriteInCellName = "Items/axe_in_cell";
 
 	public Axe() {
 		sprite = Resources.Load<Texture2D> (spriteName);
-		spriteInBlock = Resources.Load<Sprite> (spriteInBlockName);
+		spriteInCell = Resources.Load<Sprite> (spriteInCellName);
 	}
 
 }

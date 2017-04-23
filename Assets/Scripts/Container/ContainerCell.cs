@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryBlock : MonoBehaviour {
+public class ContainerCell : MonoBehaviour {
 
 	Item item;
-	string defaultSprite = "Inventory/block";
+	string defaultSprite = "Container/Cell";
 	Image image;
 
 	// Use this for initialization
@@ -19,7 +19,7 @@ public class InventoryBlock : MonoBehaviour {
 		if (item == null)
 			image.sprite = Resources.Load<Sprite> (defaultSprite);
 		else
-			image.sprite = item.getSpriteInBlock ();
+			image.sprite = item.getSpriteInCell ();
 	}
 
 	public void setItem(Item item) {
