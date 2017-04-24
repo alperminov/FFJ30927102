@@ -8,8 +8,14 @@ public class Axe : Item {
 	public string spriteInCellName = "Items/axe_in_cell";
 
 	public Axe() {
-		sprite = Resources.Load<Texture2D> (spriteName);
-		spriteInCell = Resources.Load<Sprite> (spriteInCellName);
+		itemCount = 1;
+		this.maxItemCount = 99;
+		loadResources (spriteName, spriteInCellName);
 	}
 
+	public Axe(int count) {
+		itemCount = count;
+		this.maxItemCount = 99;
+		loadResources (spriteName, spriteInCellName);
+	}
 }

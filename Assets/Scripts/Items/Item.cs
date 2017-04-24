@@ -4,14 +4,27 @@ using UnityEngine;
 
 public abstract class Item  {
 
-	protected Texture2D sprite;
-	protected Sprite spriteInCell; 
+	public Texture2D sprite { get; set; }
+	public Sprite spriteInCell { get; set; }
+	public int itemCount { get; set; }
+	protected int maxItemCount;
 
-	public Texture2D getSprite () {
-		return sprite;
+	protected void loadResources(string spriteName, string spriteInCellName) {
+		sprite = Resources.Load<Texture2D> (spriteName);
+		spriteInCell = Resources.Load<Sprite> (spriteInCellName);
 	}
 
-	public Sprite getSpriteInCell() {
-		return spriteInCell;
+	public bool joinItems(Item joiningItem) {
+		if (this.GetType () == joiningItem.GetType ()) {
+			if ((this.itemCount + joiningItem.itemCount) <= this.maxItemCount) {
+				this.itemCount += joiningItem.itemCount;
+				return true;
+			}				
+		}
+		return false;
+	}
+
+	public int getMaxItemCount() {
+		return maxItemCount;
 	}
 }

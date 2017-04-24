@@ -392,7 +392,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: e2fbffff
     m_LastClickedID: -1054
-    m_ExpandedIDs: e2fbffffe4fbffff00000000e8250000
+    m_ExpandedIDs: b682feffeeb1feff14f9feffda82ffffdcd0ffffa8ecffffe0fbffffe2fbffffe4fbffff00000000e8250000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -447,9 +447,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 276.65958, y: 502.7508, z: 0}
+    m_Target: {x: 384.6787, y: 122.47619, z: 0}
     speed: 2
-    m_Value: {x: 276.65958, y: 502.7508, z: 0}
+    m_Value: {x: 384.6787, y: 122.47619, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -476,9 +476,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 2197.8628
+    m_Target: 362.549
     speed: 2
-    m_Value: 2197.8628
+    m_Value: 362.549
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -552,19 +552,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Menu
+    - Assets/Scripts/Items
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Menu
+  - Assets/Scripts/Items
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Public\Documents\Unity Projects\FFJ
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 56}
-    m_SelectedIDs: 86250000
-    m_LastClickedID: 9606
-    m_ExpandedIDs: 00000000e4240000462500005c2500006a2500009c250000aa250000
+    scrollPos: {x: 0, y: 72}
+    m_SelectedIDs: 52250000
+    m_LastClickedID: 9554
+    m_ExpandedIDs: 00000000e4240000462500005c2500006a2500009c250000aa25000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -617,10 +617,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: e0fbffff
-    m_LastClickedInstanceID: -1056
+    m_SelectedInstanceIDs: e2fbffff
+    m_LastClickedInstanceID: -1054
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: cc66ffff3c27000062250000
+    m_ExpandedInstanceIDs: cc66ffff3c270000622500002ad3ffffdcceffff58b3feff
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -646,7 +646,7 @@ MonoBehaviour:
     m_NewAssetIndexInList: -1
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
-  m_DirectoriesAreaWidth: 115
+  m_DirectoriesAreaWidth: 233
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52

@@ -5,28 +5,31 @@ using UnityEngine.UI;
 
 public class ContainerCell : MonoBehaviour {
 
-	Item item;
+	public Item item { get; set; }
 	string defaultSprite = "Container/Cell";
-	Image image;
+	Image itemImage;
+	Text itemCountText;
 
 	// Use this for initialization
 	void Start () {
-		image = GetComponent<Image> ();
+		itemCountText = transform.Find("ItemCount").GetComponent<Text> ();
+		itemImage = GetComponent<Image> ();
 	}
 
 	//Если в блоке нет ничего, грузится дефолтный спрайт, иначе спрайт предмета
 	void Update () {
-		if (item == null)
-			image.sprite = Resources.Load<Sprite> (defaultSprite);
-		else
-			image.sprite = item.getSpriteInCell ();
+		if (item == null) {
+			itemCountText.text = "";
+			itemImage.sprite = Resources.Load<Sprite> (defaultSprite);
+		}
+		else {
+			int itemCount = item.itemCount;
+			itemImage.sprite = item.spriteInCell;
+			if (itemCount > 1)
+				itemCountText.text = itemCount.ToString ();
+			else
+				itemCountText.text = "";
+		}
 	}
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
-
-	public Item getItem() {
-		return item;
-	}
+		
 }

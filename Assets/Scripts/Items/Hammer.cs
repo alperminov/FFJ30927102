@@ -8,8 +8,14 @@ public class Hammer : Item {
 	public string spriteInCellName = "Items/hammer_in_cell";
 
 	public Hammer() {
-		sprite = Resources.Load<Texture2D> (spriteName);
-		spriteInCell = Resources.Load<Sprite> (spriteInCellName);
+		itemCount = 1;
+		this.maxItemCount = 99;
+		loadResources (spriteName, spriteInCellName);
 	}
 
+	public Hammer(int count) {
+		itemCount = count;
+		this.maxItemCount = 99;
+		loadResources (spriteName, spriteInCellName);
+	}
 }
