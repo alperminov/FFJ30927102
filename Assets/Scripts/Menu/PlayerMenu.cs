@@ -8,8 +8,12 @@ public class PlayerMenu : MonoBehaviour {
 	const int MOUSE_RIGHT_BUTTON = 1;
 	const int MOUSE_WHEEL_BUTTON = 2;
 
-	public string playerInventoryTag;
-	public string playerTag;
+	public string playerContainerName;
+	public string storageContainerName;
+	public string playerName;
+	public int containerColumnCount = 4;
+	public int storageContainerCellCount = 16; //Количество ячеек в контейнере
+	public GameObject containerCellPrefab; //Ссылка блок инвентаря в Unity, задается в Unity UI
 
 	private bool inventoryIsActive;
 	private Canvas canvas;
@@ -21,12 +25,12 @@ public class PlayerMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag (playerTag).GetComponent<Player> ();
+		player = GameObject.Find(playerName).GetComponent<Player> ();
 		canvas = GetComponent<Canvas> ();
 		canvas.enabled = false;
 		inventoryIsActive = false;
-		playerInventory = player.playerInventory;
-		//container = new Container (containerCellCount, inventoryColumnCount, containerTag, containerCellPrefab);
+		playerInventory = new Container (player.inventoryCellCount, containerColumnCount, playerContainerName, containerCellPrefab);
+		storageContainer = new Container (storageContainerCellCount, containerColumnCount, storageContainerName, containerCellPrefab);
 	}
 	
 	// Update is called once per frame
@@ -72,6 +76,7 @@ public class PlayerMenu : MonoBehaviour {
 			if (inventoryIsActive) {
 				canvas.enabled = false;
 				inventoryIsActive = false;
+				Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
 			}
 			else {
 				canvas.enabled = true;

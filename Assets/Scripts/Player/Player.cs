@@ -10,14 +10,12 @@ public class Player : Character {
     private const string doorTag = "Door";
     private const string lockerTag = "Locker";
 
-	public int containerCellCount = 16, inventoryColumnCount = 4; //Параметры сетки инвентаря
+	public int inventoryCellCount = 16; 
 	public string containerTag;
-	public GameObject containerCellPrefab; //Ссылка блок инвентаря в Unity, задается в Unity UI
-	public Container playerInventory { get; set; }
+	public List<Item> itemList;
 
     // Use this for initialization
     void Start () {
-		playerInventory = new Container (containerCellCount, inventoryColumnCount, containerTag, containerCellPrefab);
 		rigidbody = GetComponent<Rigidbody2D> ();
 		moveSpeed = 5f;
      	maxSpeed = 5f;

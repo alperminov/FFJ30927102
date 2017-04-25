@@ -8,47 +8,42 @@ public class Container: Transform {
 
 	private static Item draggedItem; //Предмет, который игрок перетаскивает
 	private static ContainerCell previousInventoryCell; //Блок, из которого игрок начал тащить предмет. Необходим для свопа обьектов в инвентаре
+	private int freeSpace;
 
-	public Container (int cellCount, int columnCount, string containerTag, GameObject cellPrefab) {
-
+	public Container (int cellCount, int columnCount, string containerName, GameObject cellPrefab) {
+		
 		containerCells = new List<GameObject> ();
-		GameObject[] panels = GameObject.FindGameObjectsWithTag(containerTag);
+		GameObject panel = GameObject.Find(containerName);
 		RectTransform cellRectTransform = cellPrefab.GetComponent<RectTransform> ();
-		RectTransform containerRectTransform = GameObject.FindGameObjectWithTag (containerTag).GetComponent<RectTransform>();
+		RectTransform containerRectTransform = panel.GetComponent<RectTransform>();
+		freeSpace = cellCount;
 
 		float width = containerRectTransform.rect.width / columnCount;
 		float ratio = width / cellRectTransform.rect.width;
 		float height = cellRectTransform.rect.height * ratio;
-		int rowCount = cellCount / columnCount;
-		if (cellCount % rowCount > 0)
-			rowCount++;
-		foreach (GameObject panel in panels) {
-			//Генерация сетки инвентаря
-			int j = 0;
-			for (int i = 0; i < cellCount; i++) {
+		//Генерация сетки инвентаря
+		int j = 0;
+		for (int i = 0; i < cellCount; i++) {
 
-				if (i % columnCount == 0)
-					j++;
+			if ( i % columnCount == 0)
+				j++;
+				
+			GameObject newCell = Instantiate (cellPrefab) as GameObject;
+			newCell.name = panel.name + " cell at (" + i + "," + j + ")";
+			newCell.transform.SetParent (panel.transform);
 
+			//Преобразование ячейки до нужного размера
+			RectTransform rectTransform = newCell.GetComponent<RectTransform> ();
 
-				GameObject newCell = Instantiate (cellPrefab) as GameObject;
-				newCell.name = panel.name + " cell at (" + i + "," + j + ")";
-				newCell.transform.SetParent (panel.transform);
+			float x = -containerRectTransform.rect.width / 2 + width * (i % columnCount);
+			float y = containerRectTransform.rect.height / 2 - height * j;
+			rectTransform.offsetMin = new Vector2 (x, y);
 
-				//Преобразование ячейки до нужного размера
-				RectTransform rectTransform = newCell.GetComponent<RectTransform> ();
+			x = rectTransform.offsetMin.x + width;
+			y = rectTransform.offsetMin.y + height;
+			rectTransform.offsetMax = new Vector2 (x, y);
 
-				float x = -containerRectTransform.rect.width / 2 + width * (i % columnCount);
-				float y = containerRectTransform.rect.height / 2 - height * j;
-				rectTransform.offsetMin = new Vector2 (x, y);
-
-				x = rectTransform.offsetMin.x + width;
-				y = rectTransform.offsetMin.y + height;
-				rectTransform.offsetMax = new Vector2 (x, y);
-
-				containerCells.Add (newCell);
-
-			}
+			containerCells.Add (newCell);
 		}
 	}
 		
@@ -105,35 +100,27 @@ public class Container: Transform {
 
 	//Реализация Drop
 	public static void processKeyRelease(float mouseX, float mouseY, List<GameObject> containerCells) {
-		bool cursorIsInCell = false;
+		
 		ContainerCell containerCell = null;
-		Item item = null;
-
 		foreach (GameObject cell in containerCells) {
+			
 			containerCell = cell.GetComponent<ContainerCell> ();
 			RectTransform rectTransform = cell.GetComponent<RectTransform> ();
-			item = containerCell.item;
 
 			if (CursorIsInBCell (rectTransform, mouseX, mouseY)) {
-				cursorIsInCell = true;
+				if (draggedItem != null)
+					moveItem (draggedItem, containerCell, previousInventoryCell);
 				break;
 			}
 		}
 
-		if (cursorIsInCell && draggedItem != null) {
-			if (item == null) 
-				containerCell.item = draggedItem;
-			else if (!item.joinItems(draggedItem)) {
-				previousInventoryCell.item = item;
-				containerCell.item = draggedItem;	
-			}
-		}
 		Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);
 		draggedItem = null;
 	}
 
 	//Проверка нахождения курсора внутри какой либо из ячеек инвентаря
 	static bool CursorIsInBCell(RectTransform cellRectTransf, float mouseX, float mouseY) {
+		
 		if ((mouseX >= (cellRectTransf.position.x - cellRectTransf.rect.width / 2)) && (mouseX <= (cellRectTransf.position.x + cellRectTransf.rect.width / 2)) &&
 			(mouseY >= (cellRectTransf.position.y - cellRectTransf.rect.height / 2)) && (mouseY <= (cellRectTransf.position.y + cellRectTransf.rect.height / 2))) {
 			return true;
@@ -141,4 +128,55 @@ public class Container: Transform {
 		return false;
 	}
 
+	public bool addItem(Item item) {
+		
+		if (freeSpace > 0) {
+			ContainerCell firstEmptyCell = null;
+			bool itemsJoined = false;
+			foreach (GameObject cell in containerCells) {
+
+				ContainerCell containerCell = cell.GetComponent<ContainerCell> ();
+
+				if (containerCell.item == null) {
+					if (firstEmptyCell == null)
+						firstEmptyCell = containerCell;
+				}
+
+				else if (containerCell.item.joinItems (item)) {
+					itemsJoined = true;
+					break;
+				}
+			}
+			if (!itemsJoined)
+				firstEmptyCell.item = item;
+			return true;
+		}
+		else return false;
+	}
+
+	//Возвращает объекты которые не удалось добавить
+	public List<Item> addItems(List<Item> itemList) {
+		int i;
+		int itemCount = itemList.Count;
+		for (i = 0; i < itemCount; i++)
+			if (!addItem (itemList [i]))
+				break;
+		
+		if (i < itemCount)
+			return itemList.GetRange (i, itemCount - i);
+		else
+			return null;
+
+	}
+
+	public static void moveItem(Item item, ContainerCell fromCell, ContainerCell toCell) {
+		
+		if (toCell.item == null)
+			toCell.item = item;
+		
+		else if (!toCell.item.joinItems (item)) {
+			fromCell.item = item;
+			toCell.item = draggedItem;	
+		}
+	}
 }

@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\Character\Character.cs" />
      <Compile Include="Assets\Scripts\Container\Container.cs" />
      <Compile Include="Assets\Scripts\Container\ContainerCell.cs" />
+     <Compile Include="Assets\Scripts\Container\ContainerManager.cs" />
      <Compile Include="Assets\Scripts\Items\Axe.cs" />
      <Compile Include="Assets\Scripts\Items\Hammer.cs" />
      <Compile Include="Assets\Scripts\Items\Item.cs" />
