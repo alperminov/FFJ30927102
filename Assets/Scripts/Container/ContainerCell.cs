@@ -27,9 +27,14 @@ public class ContainerCell : MonoBehaviour {
 			itemImage.sprite = item.spriteInCell;
 			if (itemCount > 1)
 				itemCountText.text = itemCount.ToString ();
+			else if (itemCount == 0) {
+				item = null;
+				itemCountText.text = "";
+				itemImage.sprite = Resources.Load<Sprite> (defaultSprite);
+			}
 			else
 				itemCountText.text = "";
 		}
 	}
-		
+
 }

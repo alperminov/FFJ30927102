@@ -9,13 +9,13 @@ public class Axe : Item {
 
 	public Axe() {
 		itemCount = 1;
-		this.maxItemCount = 99;
+		stackSize = 99;
 		loadResources (spriteName, spriteInCellName);
 	}
 
 	public Axe(int count) {
 		itemCount = count;
-		this.maxItemCount = 99;
+		stackSize = 99;
 		loadResources (spriteName, spriteInCellName);
 	}
 }

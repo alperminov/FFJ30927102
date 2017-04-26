@@ -9,13 +9,13 @@ public class Hammer : Item {
 
 	public Hammer() {
 		itemCount = 1;
-		this.maxItemCount = 99;
+		stackSize = 99;
 		loadResources (spriteName, spriteInCellName);
 	}
 
 	public Hammer(int count) {
 		itemCount = count;
-		this.maxItemCount = 99;
+		stackSize = 99;
 		loadResources (spriteName, spriteInCellName);
 	}
 }

@@ -54,10 +54,8 @@ public class Container: Transform {
 			RectTransform rectTransform = cell.GetComponent<RectTransform> ();
 
 			if (CursorIsInBCell(rectTransform, mouseX, mouseY)) {
-				if (containerCell.item == null)
-					containerCell.item = new Axe ();
-				else
-					containerCell.item.joinItems (new Axe ());
+				//this.addItem (new Axe ());
+				moveItem (new Axe (30), null, containerCell, containerCells);
 			}
 		}
 
@@ -70,10 +68,7 @@ public class Container: Transform {
 			RectTransform rectTransform = cell.GetComponent<RectTransform> ();
 
 			if (CursorIsInBCell(rectTransform, mouseX, mouseY)) {
-				if (containerCell.item == null)
-					containerCell.item = new Hammer ();
-				else
-					containerCell.item.joinItems (new Hammer ());
+				moveItem (new Hammer (210), null, containerCell, containerCells);
 			}
 		}
 
@@ -109,7 +104,7 @@ public class Container: Transform {
 
 			if (CursorIsInBCell (rectTransform, mouseX, mouseY)) {
 				if (draggedItem != null)
-					moveItem (draggedItem, containerCell, previousInventoryCell);
+					moveItem (draggedItem, previousInventoryCell, containerCell, containerCells);
 				break;
 			}
 		}
@@ -128,11 +123,12 @@ public class Container: Transform {
 		return false;
 	}
 
-	public bool addItem(Item item) {
+	public Item addItem(Item item) {
 		
+		bool itemsJoined = false;
+
 		if (freeSpace > 0) {
 			ContainerCell firstEmptyCell = null;
-			bool itemsJoined = false;
 			foreach (GameObject cell in containerCells) {
 
 				ContainerCell containerCell = cell.GetComponent<ContainerCell> ();
@@ -142,16 +138,12 @@ public class Container: Transform {
 						firstEmptyCell = containerCell;
 				}
 
-				else if (containerCell.item.joinItems (item)) {
-					itemsJoined = true;
+				else if (containerCell.item.joinItems (item) == null) {
 					break;
 				}
 			}
-			if (!itemsJoined)
-				firstEmptyCell.item = item;
-			return true;
 		}
-		else return false;
+		return item;
 	}
 
 	//Возвращает объекты которые не удалось добавить
@@ -159,7 +151,7 @@ public class Container: Transform {
 		int i;
 		int itemCount = itemList.Count;
 		for (i = 0; i < itemCount; i++)
-			if (!addItem (itemList [i]))
+			if (addItem (itemList [i]).itemCount == 0)
 				break;
 		
 		if (i < itemCount)
@@ -169,14 +161,47 @@ public class Container: Transform {
 
 	}
 
-	public static void moveItem(Item item, ContainerCell fromCell, ContainerCell toCell) {
-		
-		if (toCell.item == null)
-			toCell.item = item;
-		
-		else if (!toCell.item.joinItems (item)) {
-			fromCell.item = item;
-			toCell.item = draggedItem;	
+	public static Item moveItem(Item item, ContainerCell fromCell, ContainerCell toCell, List<GameObject> containerCells) {
+		Item result = moveItem (item, toCell, containerCells);
+		if (fromCell != null) {
+			fromCell.item = result;
+			return null;
 		}
+		return result;
+	}
+
+	static Item moveItem(Item item, ContainerCell toCell, List<GameObject> containerCells) {
+		Item result = item;
+
+		if (toCell != null) {
+			if (toCell.item == null)
+				toCell.item = item.getStack ();
+			result = toCell.item.joinItems (item);
+		}
+		else {
+			ContainerCell emptyCell = findEmptyCell (containerCells);
+
+			if (emptyCell == null)
+				return item;
+			
+			emptyCell.item = toCell.item.joinItems (item);
+		}
+
+		if (result.itemCount == 0)
+			return result;
+		else {
+			result = moveItem (item, null, containerCells);
+			return result;
+		}
+			
+	}
+
+	static ContainerCell findEmptyCell(List<GameObject> containerCells) {
+		foreach (GameObject cell in containerCells) {
+			ContainerCell containerCell = cell.GetComponent<ContainerCell> ();
+			if (containerCell.item == null)
+				return containerCell;
+		}
+		return null;
 	}
 }

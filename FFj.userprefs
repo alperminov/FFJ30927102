@@ -2,16 +2,16 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Container\Container.cs">
     <Files>
-      <File FileName="Assets\Scripts\Player\Player.cs" Line="15" Column="29" />
-      <File FileName="Assets\Scripts\Items\Axe.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Items\Hammer.cs" Line="8" Column="58" />
-      <File FileName="Assets\Scripts\Items\Item.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player\Player.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Items\Axe.cs" Line="18" Column="3" />
+      <File FileName="Assets\Scripts\Items\Hammer.cs" Line="18" Column="18" />
+      <File FileName="Assets\Scripts\Items\Item.cs" Line="32" Column="3" />
       <File FileName="Assets\Scripts\Character\Character.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Menu\MainMenu.cs" Line="6" Column="23" />
-      <File FileName="Assets\Scripts\Menu\PlayerMenu.cs" Line="28" Column="1" />
-      <File FileName="Assets\Scripts\Container\Container.cs" Line="28" Column="24" />
-      <File FileName="Assets\Scripts\Container\ContainerCell.cs" Line="26" Column="35" />
-      <File FileName="Assets\Scripts\Container\ContainerManager.cs" Line="20" Column="2" />
+      <File FileName="Assets\Scripts\Menu\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menu\PlayerMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Container\Container.cs" Line="169" Column="4" />
+      <File FileName="Assets\Scripts\Container\ContainerCell.cs" Line="33" Column="63" />
+      <File FileName="Assets\Scripts\Container\ContainerManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
