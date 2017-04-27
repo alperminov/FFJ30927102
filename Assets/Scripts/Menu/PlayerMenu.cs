@@ -11,15 +11,16 @@ public class PlayerMenu : MonoBehaviour {
 	public string playerContainerName;
 	public string storageContainerName;
 	public string playerName;
+	public string containerTag;
 	public int containerColumnCount = 4;
-	public int storageContainerCellCount = 16; //Количество ячеек в контейнере
+	public int containerCellCount = 16; //Количество ячеек в контейнере
 	public GameObject containerCellPrefab; //Ссылка блок инвентаря в Unity, задается в Unity UI
 
 	private bool inventoryIsActive;
 	private Canvas canvas;
 	private bool mouseLkHold; //Флаг зажатия ЛКМ
 	private float clickTime= 0f;
-	private Container playerInventory;
+	private Container container;
 	private Container storageContainer;
 	private Player player;
 
@@ -29,8 +30,8 @@ public class PlayerMenu : MonoBehaviour {
 		canvas = GetComponent<Canvas> ();
 		canvas.enabled = false;
 		inventoryIsActive = false;
-		playerInventory = new Container (player.inventoryCellCount, containerColumnCount, playerContainerName, containerCellPrefab);
-		storageContainer = new Container (storageContainerCellCount, containerColumnCount, storageContainerName, containerCellPrefab);
+		container = new Container (containerCellCount, containerColumnCount, containerTag, containerCellPrefab);
+		//storageContainer = new Container (storageContainerCellCount, containerColumnCount, storageContainerName, containerCellPrefab);
 	}
 	
 	// Update is called once per frame
@@ -44,12 +45,12 @@ public class PlayerMenu : MonoBehaviour {
 
 		if (inventoryIsActive) {
 			if (Input.GetMouseButtonDown (MOUSE_RIGHT_BUTTON)) {
-				Container.processRClick (mouseX, mouseY, playerInventory.containerCells);
+				container.processRClick (mouseX, mouseY);
 
 			}
 
 			if (Input.GetMouseButtonDown (MOUSE_WHEEL_BUTTON)) {
-				Container.processMClick (mouseX, mouseY, playerInventory.containerCells);
+				container.processMClick (mouseX, mouseY);
 
 			}
 
@@ -64,10 +65,10 @@ public class PlayerMenu : MonoBehaviour {
 			
 			if (Input.GetMouseButton (MOUSE_LEFT_BUTTON) && !mouseLkHold && clickTime > 0.6) {
 				mouseLkHold = true;
-				Container.processKeyHold (mouseX, mouseY, playerInventory.containerCells);
+				container.processKeyHold (mouseX, mouseY);
 				clickTime = 0;
 			} else if (!Input.GetMouseButton (MOUSE_LEFT_BUTTON) && mouseLkHold) {
-				Container.processKeyRelease (mouseX, mouseY, playerInventory.containerCells);
+				container.processKeyRelease (mouseX, mouseY);
 				mouseLkHold = false;
 			}
 		}

@@ -8,13 +8,6 @@ public class Axe : Item {
 	public string spriteInCellName = "Items/axe_in_cell";
 
 	public Axe() {
-		itemCount = 1;
-		stackSize = 99;
-		loadResources (spriteName, spriteInCellName);
-	}
-
-	public Axe(int count) {
-		itemCount = count;
 		stackSize = 99;
 		loadResources (spriteName, spriteInCellName);
 	}
