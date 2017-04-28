@@ -170,7 +170,7 @@ public class Container: Transform {
 	}
 	*/
 
-	ContainerCell findCell(System.Type itemType) {
+	ContainerCell findCell(System.Type itemType, List<GameObject> containerCells) {
 		
 		foreach (GameObject cell in containerCells) {
 			ContainerCell containerCell = cell.GetComponent<ContainerCell> ();
@@ -181,5 +181,14 @@ public class Container: Transform {
 			}
 		}
 		return null;
+	}
+
+	public List<Item> addItems(List<Item> items, string storageName) {
+		GameObject storage = GameObject.Find (storageName);
+		foreach (Transform child in storage.transform) {
+			ContainerCell cell = child.GetComponent<ContainerCell> ();
+			items = cell.addItems (items);
+		}
+		return items;
 	}
 }

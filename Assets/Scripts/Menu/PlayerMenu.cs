@@ -84,5 +84,14 @@ public class PlayerMenu : MonoBehaviour {
 				inventoryIsActive = true;
 			}
 		}
+
+		if (Input.GetKeyDown ("f")) {
+			List<Item> items = new List<Item> ();
+			for (int i = 0; i < 99; i++) {
+				items.Add (new Axe ());
+				items.Add (new Hammer ());
+			}
+			container.addItems (items, playerContainerName);
+		}
 	}
 }
